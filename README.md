@@ -1,14 +1,18 @@
-## Files
+## Task A
+Write a MapReduce program in Hadoop that implements a simple “Mutual/Common friend list of two friends". The key idea is that if two people are friend then they have a lot of mutual/common friends. This program will find the common/mutual friend list for them.
+
+For example,
+Alice’s friends are Bob, Sam, Sara, Nancy Bob’s friends are Alice, Sam, Clara, Nancy Sara’s friends are Alice, Sam, Clara, Nancy
+As Alice and Bob are friend and so, their mutual friend list is [Sam, Nancy]
+As Sara and Bob are not friend and so, their mutual friend list is empty. (In this case you may exclude them from your output).
+
 Input Files: 
 1. soc-LiveJournal1Adj.txt
 2. userdata.txt
 
+## Running the program for Task A
 Jar File: MapReduce.jar
 Class: Part 1
-
-
-## Running the program
-
 1. Create a directory on HDFS and put the input files.
   ```
   hdfs dfs -mkdir /test
