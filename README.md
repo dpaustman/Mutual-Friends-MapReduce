@@ -139,3 +139,17 @@ Sample output:
 0,1	[Juan Figueroa: Columbia,Beth Watson: Lake Worth]
 ```
 
+## Task D
+Using reduce-side join and job chaining:
+
+Step 1: Calculate the average age of the direct friends of each user.
+
+Step 2: Sort the users by the average age from step 1 in descending order.
+
+Step 3. Output the tail 15 (15 lowest averages) users from step 2 with their address and the
+calculated average age.
+
+Sample output:
+User A, 1000 Anderson blvd, Dallas, TX, average age of direct friends.
+
+
