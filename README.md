@@ -48,9 +48,9 @@ hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt
   ```
   
 ## Output
-0,1 .            5,20
+0,1                      5,20
 
-20,28193        1
+20,28193                  1
 
 1,29826         
 
