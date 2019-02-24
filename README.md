@@ -89,7 +89,7 @@ hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt
 Output 
 ```
 16539,40423     64
-3610,3634	      61
+3610,3634       61
 31482,31545	    60
 41851,41903	    58
 2689,29425	    55
