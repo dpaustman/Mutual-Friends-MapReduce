@@ -1,4 +1,4 @@
-# Mutual-Friends-MapReduce
+# Finding Mutual Friends
 Finding mutual friends of users using Hadoop Mapreduce
 
 Input Files: 
@@ -20,7 +20,7 @@ where <User_A> & <User_B> are unique IDs corresponding to a user A and B (A and 
 
 Please find the above output for the following pairs. (0,4), (20, 22939), (1, 29826), (6222, 19272), (28041, 28056)
 
-## Running part(a)
+## Running the program
 
 1. Create a directory on HDFS and put the input files.
   ```
