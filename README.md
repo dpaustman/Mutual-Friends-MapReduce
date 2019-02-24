@@ -136,4 +136,6 @@ hadoop jar <Location-of-MapReduce.jar-on-local-PC> Part2 /test/userdata.txt /tes
 ### Output for Task C
 Sample output:
 ```
+0,1	[Juan Figueroa: Columbia,Beth Watson: Lake Worth]
+```
 
