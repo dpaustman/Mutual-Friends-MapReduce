@@ -20,7 +20,7 @@ Please find the output for the following pairs:
 
 
 
-## Running Task AInput Files: 
+### Running Task A: 
 Input Files: 
 1. soc-LiveJournal1Adj.txt
 
@@ -51,7 +51,7 @@ hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt
   hdfs dfs -cat /test/out/part-r-00000 | grep "<userid_1>,<userid_2> <press ctrl+v> <press tab>"
   ```
   
-## Output
+### Output
 ```
 0,1               5,20
 20,28193          1
@@ -66,7 +66,7 @@ output them in decreasing order.
 Output Format:
 <User_A>, <User_B> <TAB> <Number of Mutual Friends><TAB><Mutual/Common Friend Number>
 
-## Running Task B
+### Running Task B
 Input Files: 
 1. soc-LiveJournal1Adj.txt
 Jar File: MapReduce.jar
