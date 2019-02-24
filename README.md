@@ -24,9 +24,9 @@ Please find the output for the following pairs:
 Input Files: 
 1. soc-LiveJournal1Adj.txt
 
-Jar File: MapReduce.jar
+Jar File: *MapReduce.jar*
 
-Class: Part2
+Class: **Part2**
 
 1. Create a directory on HDFS and put the input files.
   ```
@@ -71,8 +71,9 @@ Output Format:
 ### Running Task B
 Input Files: 
 1. soc-LiveJournal1Adj.txt
-Jar File: MapReduce.jar
-Class: Part2
+
+Jar File: *MapReduce.jar*
+Class: **Part2**
 
 1. Delete the output directories if they already exists:
 ```
@@ -102,7 +103,7 @@ hadoop jar <Location-of-MapReduce.jar-on-local-PC> Part2 /test/soc-LiveJournal1A
 4425,4447       52
 ```
 
-### Task C
+## Task C
 Please use in-memory join to answer this question.
 Given any two Users (they are friend) as input, output the list of the names and the city of their mutual friends.
 Note: use the userdata.txt to get the extra user information. Output format:
@@ -116,8 +117,8 @@ Input Files:
 1. soc-LiveJournal1Adj.txt
 2. userdata.txt
 
-Jar File: MapReduce.jar
-Class: Part3
+Jar File: *MapReduce.jar*
+Class: **Part3**
 
 1. Delete the output directories if they already exists:
 ```
@@ -152,4 +153,16 @@ calculated average age.
 Sample output:
 User A, 1000 Anderson blvd, Dallas, TX, average age of direct friends.
 
+## Running the files
+Input Files: 
+1. soc-LiveJournal1Adj.txt
+2. userdata.txt
 
+Jar File: *MapReduce.jar*
+Class: **Part4**
+
+1. Delete the output directories if they already exists:
+```
+hdfs dfs -rm -r /test/out1
+hdfs dfs -rm -r /test/out2
+```
