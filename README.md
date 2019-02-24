@@ -1,6 +1,12 @@
 # Mutual-Friends-MapReduce
 Finding mutual friends of users using Hadoop Mapreduce
 
+Input Files: 
+1. soc-LiveJournal1Adj.txt
+2. userdata.txt
+
+Jar File: MapReduce.jar
+
 ## Task 1
 Write a MapReduce program in Hadoop that implements a simple “Mutual/Common friend list of two friends". The key idea is that if two people are friend then they have a lot of mutual/common friends. This question will give any two Users as input, output the list of the user id of their mutual friends. For example,Alice’s friends are Bob, Sam, Sara, Nancy Bob’s friends are Alice, Sam, Clara, Nancy Sara’s friends are Alice, Sam, Clara, NancyAs Alice and Bob are friend and so, their mutual friend list is [Sam, Nancy] As Sara and Bob are not friend and so, their mutual friend list is empty
 
@@ -16,10 +22,24 @@ Please find the above output for the following pairs. (0,4), (20, 22939), (1, 29
 
 ## Running part(a)
 
-1. Run the following command
+1. Run the following commands to create a directory on HDFS and put the input files.
   ```
   hdfs dfs -mkdir /test
+  hdfs dfs -put <location of soc-LiveJournal1Adj.txt on PC> /test
+  hdfs dfs -put <location of userdata.txt PC> /test
   ```
+  
+2. Delete the output directory if it already exists:
+
+```
+hdfs dfs -rm -r /test/out
+```
+
+3. Run the jar file:
+```
+hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt /test/out
+```
+
   
 
 
