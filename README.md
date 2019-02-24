@@ -66,13 +66,14 @@ Please answer this question by using dataset from Q1.
 Find friend pairs whose number of common friends (number of mutual friend) is within the top-10 in all the pairs. Please
 output them in decreasing order.
 Output Format:
-<User_A>, <User_B> <TAB> <Number of Mutual Friends><TAB><Mutual/Common Friend Number>
+<User_A>, <User_B> <TAB> <Number of Mutual Friends> <TAB> <Mutual/Common Friend Number>
 
 ### Running Task B
 Input Files: 
 1. soc-LiveJournal1Adj.txt
 
 Jar File: *MapReduce.jar*
+
 Class: **Part2**
 
 1. Delete the output directories if they already exists:
@@ -118,6 +119,7 @@ Input Files:
 2. userdata.txt
 
 Jar File: *MapReduce.jar*
+
 Class: **Part3**
 
 1. Delete the output directories if they already exists:
@@ -159,6 +161,7 @@ Input Files:
 2. userdata.txt
 
 Jar File: *MapReduce.jar*
+
 Class: **Part4**
 
 1. Delete the output directories if they already exists:
