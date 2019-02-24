@@ -72,20 +72,31 @@ Input Files:
 Jar File: MapReduce.jar
 Class: Part 1
 
-1. Delete the output directory if it already exists:
+1. Delete the output directories if they already exists:
 ```
-hdfs dfs -rm -r /test/out
+hdfs dfs -rm -r /test/out1
+hdfs dfs -rm -r /test/out1
 ```
 2. Run the jar file:
 ```
-hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt /test/out
+hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt /test/out1 /test/out2
 ```
 3. Read the output
   ``` 
-  hdfs dfs -cat /test/out/part-r-00000
+  hdfs dfs -cat /test/out2/part-r-00000
  ```
-4. To get output for specific pairs, run:
-  ```
-  hdfs dfs -cat /test/out/part-r-00000 | grep "<userid_1>,userid_2> <press ctrl+v><press tab>"
-  ```
+
+Output 
+```
+16539,40423	  64
+3610,3634	    61
+31482,31545	  60
+41851,41903	  58
+2689,29425	  55
+47034,47047	  55
+32867,32869	  54
+7983,8003	    52
+4069,16215	  52
+4425,4447	    52
+```
   
