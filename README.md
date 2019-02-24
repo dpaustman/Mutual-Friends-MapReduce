@@ -26,7 +26,7 @@ Input Files:
 
 Jar File: MapReduce.jar
 
-Class: Part 1
+Class: Part2
 
 1. Create a directory on HDFS and put the input files.
   ```
@@ -48,7 +48,7 @@ hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt
  ```
 5. To get output for specific pairs, run:
   ```
-  hdfs dfs -cat /test/out/part-r-00000 | grep "<userid_1>,userid_2> <press ctrl+v><press tab>"
+  hdfs dfs -cat /test/out/part-r-00000 | grep "<userid_1>,<userid_2> <press ctrl+v> <press tab>"
   ```
   
 ## Output
@@ -70,12 +70,12 @@ Output Format:
 Input Files: 
 1. soc-LiveJournal1Adj.txt
 Jar File: MapReduce.jar
-Class: Part 1
+Class: Part2
 
 1. Delete the output directories if they already exists:
 ```
 hdfs dfs -rm -r /test/out1
-hdfs dfs -rm -r /test/out1
+hdfs dfs -rm -r /test/out2
 ```
 2. Run the jar file:
 ```
