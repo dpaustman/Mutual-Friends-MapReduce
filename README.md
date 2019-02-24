@@ -88,7 +88,7 @@ hadoop jar <Location-of-MapReduce.jar-on-local-PC> Part2 /test/soc-LiveJournal1A
   hdfs dfs -cat /test/out2/part-r-00000
  ```
 
-### Output for Task B 
+### Output  
 ```
 16539,40423     64
 3610,3634       61
@@ -133,7 +133,7 @@ hadoop jar <Location-of-MapReduce.jar-on-local-PC> Part2 /test/userdata.txt /tes
   hdfs dfs -cat /test/out2/part-r-00000
  ```
 
-### Output for Task C
+### Output 
 Sample output:
 ```
 0,1	[Juan Figueroa: Columbia,Beth Watson: Lake Worth]
