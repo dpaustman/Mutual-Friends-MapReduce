@@ -17,13 +17,17 @@ where <User_A> & <User_B> are unique IDs corresponding to a user A and B (A and 
 
 Please find the output for the following pairs:
 (0,1), (20, 28193), (1, 29826), (6222, 19272), (28041, 28056)
+
+
+
+## Running Task AInput Files: 
 Input Files: 
 1. soc-LiveJournal1Adj.txt
 
-
-## Running Task A
 Jar File: MapReduce.jar
+
 Class: Part 1
+
 1. Create a directory on HDFS and put the input files.
   ```
   hdfs dfs -mkdir /test
@@ -55,5 +59,33 @@ hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt
 6222,19272
 28041,28056
 ```
+## Task B
+Please answer this question by using dataset from Q1.
+Find friend pairs whose number of common friends (number of mutual friend) is within the top-10 in all the pairs. Please
+output them in decreasing order.
+Output Format:
+<User_A>, <User_B><TAB><Number of Mutual Friends><TAB><Mutual/Common Friend Number>
 
+## Running Task B
+Input Files: 
+1. soc-LiveJournal1Adj.txt
+Jar File: MapReduce.jar
+Class: Part 1
 
+1. Delete the output directory if it already exists:
+```
+hdfs dfs -rm -r /test/out
+```
+2. Run the jar file:
+```
+hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt /test/out
+```
+3. Read the output
+  ``` 
+  hdfs dfs -cat /test/out/part-r-00000
+ ```
+4. To get output for specific pairs, run:
+  ```
+  hdfs dfs -cat /test/out/part-r-00000 | grep "<userid_1>,userid_2> <press ctrl+v><press tab>"
+  ```
+  
