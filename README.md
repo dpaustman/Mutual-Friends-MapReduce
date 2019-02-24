@@ -51,7 +51,7 @@ hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt
   hdfs dfs -cat /test/out/part-r-00000 | grep "<userid_1>,<userid_2> <press ctrl+v> <press tab>"
   ```
   
-### Output
+#### Output
 ```
 0,1               5,20
 20,28193          1
@@ -59,7 +59,7 @@ hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt
 6222,19272
 28041,28056
 ```
-## Task B
+### Task B
 Please answer this question by using dataset from Q1.
 Find friend pairs whose number of common friends (number of mutual friend) is within the top-10 in all the pairs. Please
 output them in decreasing order.
@@ -100,7 +100,7 @@ Output
 4425,4447       52
 ```
 
-## Task 3
+### Task 3
 Please use in-memory join to answer this question.
 Given any two Users (they are friend) as input, output the list of the names and the city of their mutual friends.
 Note: use the userdata.txt to get the extra user information. Output format:
@@ -109,7 +109,7 @@ Sample Output:
 
 0, 41 [Evangeline: Loveland, Agnes: Marietta]
 
-### Running Task 3:
+#### Running Task 3:
 Input Files: 
 1. soc-LiveJournal1Adj.txt
 2.userdata.txt
