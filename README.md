@@ -40,6 +40,10 @@ hdfs dfs -rm -r /test/out
 hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt /test/out
 ```
 
+4. Read the outpu
+  ``` hdfs dfs -cat /test/out/part-r-00000
+  ```
+
   
 
 
