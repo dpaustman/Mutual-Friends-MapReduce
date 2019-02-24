@@ -21,7 +21,7 @@ Input Files:
 1. soc-LiveJournal1Adj.txt
 
 
-## Running the program for Task A
+## Running Task A
 Jar File: MapReduce.jar
 Class: Part 1
 1. Create a directory on HDFS and put the input files.
