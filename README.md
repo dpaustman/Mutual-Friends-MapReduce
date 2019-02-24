@@ -1,6 +1,6 @@
 ## Mutual Friends - MapReduce
 
-### Task A
+## Task A
 Write a MapReduce program in Hadoop that implements a simple “Mutual/Common friend list of two friends". The key idea is that if two people are friend then they have a lot of mutual/common friends. This program will find the common/mutual friend list for them.
 
 For example,
@@ -51,7 +51,7 @@ hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt
   hdfs dfs -cat /test/out/part-r-00000 | grep "<userid_1>,<userid_2> <press ctrl+v> <press tab>"
   ```
   
-### Output for Task A
+### Output 
 ```
 0,1               5,20
 20,28193          1
@@ -61,7 +61,7 @@ hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt
 ```
 
 
-### Task B
+## Task B
 Please answer this question by using dataset from Q1.
 Find friend pairs whose number of common friends (number of mutual friend) is within the top-10 in all the pairs. Please
 output them in decreasing order.
