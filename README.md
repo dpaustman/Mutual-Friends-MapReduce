@@ -64,7 +64,7 @@ Please answer this question by using dataset from Q1.
 Find friend pairs whose number of common friends (number of mutual friend) is within the top-10 in all the pairs. Please
 output them in decreasing order.
 Output Format:
-<User_A>, <User_B><TAB><Number of Mutual Friends><TAB><Mutual/Common Friend Number>
+<User_A>, <User_B> <TAB> <Number of Mutual Friends><TAB><Mutual/Common Friend Number>
 
 ## Running Task B
 Input Files: 
@@ -79,7 +79,7 @@ hdfs dfs -rm -r /test/out1
 ```
 2. Run the jar file:
 ```
-hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt /test/out1 /test/out2
+hadoop jar <Location-of-MapReduce.jar-on-local-PC> Part2 /test/soc-LiveJournal1Adj.txt /test/out1 /test/out2
 ```
 3. Read the output
   ``` 
