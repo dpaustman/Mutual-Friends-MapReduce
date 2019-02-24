@@ -22,7 +22,7 @@ Please find the above output for the following pairs. (0,4), (20, 22939), (1, 29
 
 ## Running part(a)
 
-1. Run the following commands to create a directory on HDFS and put the input files.
+1. Create a directory on HDFS and put the input files.
   ```
   hdfs dfs -mkdir /test
   hdfs dfs -put <location of soc-LiveJournal1Adj.txt on PC> /test
@@ -40,10 +40,17 @@ hdfs dfs -rm -r /test/out
 hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt /test/out
 ```
 
-4. Read the outpuy
+4. Read the output
   ``` 
   hdfs dfs -cat /test/out/part-r-00000
   ```
+
+  5. To get output for specific pairs, run:
+  ```
+  hdfs dfs -cat /test/out/part-r-00000 | grep "<userid_1>,userid_2> <press ctrl+v><press tab>"
+  ```
+  
+ ## Output
 
   
 
