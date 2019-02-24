@@ -1,6 +1,6 @@
-# Mutual Friends - MapReduce
+## Mutual Friends - MapReduce
 
-## Task A
+### Task A
 Write a MapReduce program in Hadoop that implements a simple “Mutual/Common friend list of two friends". The key idea is that if two people are friend then they have a lot of mutual/common friends. This program will find the common/mutual friend list for them.
 
 For example,
