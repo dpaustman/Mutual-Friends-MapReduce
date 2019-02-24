@@ -99,4 +99,36 @@ Output
 4069,16215      52
 4425,4447       52
 ```
-  
+
+## Task 3
+Please use in-memory join to answer this question.
+Given any two Users (they are friend) as input, output the list of the names and the city of their mutual friends.
+Note: use the userdata.txt to get the extra user information. Output format:
+UserA id, UserB id, list of cities of their mutual Friends.
+Sample Output:
+
+0, 41 [Evangeline: Loveland, Agnes: Marietta]
+
+### Running Task 3:
+Input Files: 
+1. soc-LiveJournal1Adj.txt
+2.userdata.txt
+
+Jar File: MapReduce.jar
+Class: Part3
+
+1. Delete the output directories if they already exists:
+```
+hdfs dfs -rm -r /test/out1
+hdfs dfs -rm -r /test/out2
+```
+2. Run the jar file:
+```
+hadoop jar <Location-of-MapReduce.jar-on-local-PC> Part2 /test/userdata.txt /test/soc-LiveJournal1Adj.txt /test/out1 /test/out2 <userid_1> <userid_2>
+```
+3. Read the output
+  ``` 
+  hdfs dfs -cat /test/out2/part-r-00000
+ ```
+
+
