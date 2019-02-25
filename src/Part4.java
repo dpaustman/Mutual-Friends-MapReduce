@@ -29,16 +29,16 @@ public class Part4 {
 	public static class Map1 extends Mapper<LongWritable,Text,LongWritable,Text>
 	{
 	
-		private LongWritable person = new LongWritable();
+		private LongWritable user = new LongWritable();
 	
 	public void map(LongWritable key, Text value,Context context) throws IOException, InterruptedException
 	{
 		String[] line = value.toString().split("\t");
 		if(line.length==2)
 		{
-			person.set(Long.parseLong(line[0]));
-			String mapperAOutput="U:"+line[1];
-			context.write(person, new Text(mapperAOutput));
+			user.set(Long.parseLong(line[0]));
+			String temp="U:"+line[1];
+			context.write(user, new Text(temp));
 			
 			}
 		}
@@ -56,7 +56,7 @@ public class Part4 {
 		if(line.length==10)
 		{
 			person.set(Long.parseLong(line[0]));
-			String friendAddress="A:"+line[1]+","+line[3]+","+line[4]+","+line[5];
+			String friendAddress="D:"+line[1]+","+line[3]+","+line[4]+","+line[5];
 			context.write(person, new Text(friendAddress));
 			
 			}
@@ -70,8 +70,7 @@ public class Part4 {
 	{
 		
 		public HashMap<String,String> map = new HashMap<String, String>();
-		ArrayList<Text> mapperA=new ArrayList<Text>();
-		ArrayList<Text> mapperB=new ArrayList<Text>();
+		
 		int month=0;
 		int day=0;
 		int year=0;
@@ -93,8 +92,8 @@ public class Part4 {
 				String[] temp=input.split(",");
 				if(temp.length==10)
 				{
-					String user=temp[1]+":"+temp[3]+":"+temp[9];
-					map.put(temp[0].trim(), user);
+					
+					map.put(temp[0].trim(),temp[9]);
 				}
 			
 				input=buff.readLine();
@@ -109,8 +108,7 @@ public class Part4 {
 		
 		public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException
 		{
-			mapperA.clear();
-			mapperB.clear();
+		
 			
 			for(Text value:values)
 			{
@@ -118,7 +116,7 @@ public class Part4 {
 				{
 					user=value.toString().substring(2);
 				}
-				if(value.toString().charAt(0)=='A')
+				if(value.toString().charAt(0)=='D')
 				{
 					data=value.toString().substring(2);
 				}
@@ -132,19 +130,19 @@ public class Part4 {
 					{
 						if(map.containsKey(friend))
 						{
-							String[] data=map.get(friend).split(":");
-							String[] dob=data[2].split("/");
-							int result=year-Integer.parseInt(dob[2]);
-							if(Integer.parseInt(dob[0])>month)
+							String dob=map.get(friend);
+							String[] y=dob.split("/");
+						
+							int result=year-Integer.parseInt(y[2]);
+							if(Integer.parseInt(y[0])>month)
 							{
 								result--;
 							}
-							else if(Integer.parseInt(dob[0])==month)
+							else if(Integer.parseInt(y[0])==month &&Integer.parseInt(y[1])>day)
 							{
-								if(Integer.parseInt(dob[1])>day)
-								{
+								
 									result--;
-								}
+								
 							}
 							sum+=result;
 							count++;
@@ -183,7 +181,7 @@ public class Part4 {
 				String[] data=line[1].split(",");
 				if(data.length==5)
 				{
-				context.write(new IntWritable(-1*Integer.parseInt(data[4])), new Text(line[1]));
+					context.write(new IntWritable(-1*Integer.parseInt(data[4])), new Text(line[0]+"\t"+line[1]));
 				}
 			}
 		}
@@ -220,11 +218,11 @@ public class Part4 {
 		String[] otherargs=new GenericOptionsParser(conf,args).getRemainingArgs();
 
 		conf.set("userPath", otherargs[1]);
-		Job jobA = Job.getInstance(conf,"MutualFriends");
+		Job jobA = Job.getInstance(conf,"Getting average age of friends");
 		jobA.setJarByClass(Part4.class);
 		
-		MultipleInputs.addInputPath(jobA, new Path(otherargs[0]), TextInputFormat.class,Map1.class);
-		MultipleInputs.addInputPath(jobA, new Path(otherargs[1]), TextInputFormat.class,Map2.class);
+		MultipleInputs.addInputPath(jobA, new Path(otherargs[1]), TextInputFormat.class,Map1.class);
+		MultipleInputs.addInputPath(jobA, new Path(otherargs[0]), TextInputFormat.class,Map2.class);
 		
 		jobA.setReducerClass(Reduce1.class);
 		jobA.setOutputKeyClass(LongWritable.class);
@@ -236,16 +234,17 @@ public class Part4 {
 		{
 			Configuration confB=new Configuration();
 
-			Job jobB = Job.getInstance(confB,"Stage 2");
+			Job jobB = Job.getInstance(confB,"Stage 2: Printing user with highest average age of friends");
 			jobB.setJarByClass(Part4.class);
 
-			jobB.setMapperClass(Map3.class);
-						
+			jobB.setMapperClass(Map3.class);			
 			jobB.setReducerClass(Reduce2.class);
+			
 			jobB.setMapOutputKeyClass(IntWritable.class);
 			jobB.setMapOutputValueClass(Text.class);
 			jobB.setOutputKeyClass(Text.class);
 			jobB.setOutputValueClass(Text.class);
+			
 			FileInputFormat.addInputPath(jobB,new Path(otherargs[2]));
 			FileOutputFormat.setOutputPath(jobB, new Path(otherargs[3]));
 			System.exit(jobB.waitForCompletion(true)?0:1);

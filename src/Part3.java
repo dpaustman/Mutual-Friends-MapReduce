@@ -23,7 +23,77 @@ import java.util.HashMap;
 
 public class Part3  {
 	
-	public static class Map extends Mapper<LongWritable,Text,Text,Text>
+	
+	public static class Map1 extends Mapper<LongWritable,Text,Text,Text>
+	{
+	
+		String pair="";
+	
+		public void map(LongWritable key, Text value,Context context) throws IOException, InterruptedException
+		{
+			String[] line = value.toString().split("\t");
+			if(line.length==2)
+			{
+				int personA = Integer.parseInt(line[0]);
+				String[] friends =line[1].split(",");
+				for(String friend:friends)
+				{
+				
+					int personB=Integer.parseInt(friend);
+					if(personA <= personB)
+					{
+						pair=personA + "," + personB;
+					}
+					else
+					{
+						pair=personB + "," + personA;
+					}
+					context.write(new Text(pair), new Text(line[1]));
+				
+				
+				}
+			}
+		}
+	}
+	
+	
+	public static class Reduce1 extends Reducer<Text,Text,Text,Text>
+	{
+		
+		private Text result = new Text();
+		
+		public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException
+		{
+			HashMap<String, Integer> map=new HashMap<String, Integer>();
+			StringBuilder mutualFriends=new StringBuilder();
+			for(Text value : values)
+			{
+				String[] friends=value.toString().split(",");
+				for(String friend : friends)
+				{
+					if(map.containsKey(friend))
+					{
+						mutualFriends.append(friend + ',');
+					}
+					else
+					{
+						map.put(friend,1);
+					}
+				}
+			}
+			
+			if (mutualFriends.lastIndexOf(",") > -1)
+			{
+				
+				mutualFriends.deleteCharAt(mutualFriends.lastIndexOf(","));
+			}
+			result.set(new Text(mutualFriends.toString()));
+			context.write(key, result);
+		}
+		
+	}
+	
+	public static class Map2 extends Mapper<LongWritable,Text,Text,Text>
 	{
 		private static HashMap<String,String> users;
 		String personA="";
@@ -67,7 +137,7 @@ public class Part3  {
 			if(parts[0]!=null && parts[1]!=null)
 			{
 				
-				if(parts[0].equals(personA) && parts[1].equals(personB))
+				if((parts[0].equals(personA) && parts[1].equals(personB)) || (parts[1].equals(personA) && parts[0].equals(personB)))
 				{
 			
 				
@@ -90,7 +160,7 @@ public class Part3  {
 	
 	
 	
-	public static class Reduce extends Reducer<Text,Text,Text,Text>
+	public static class Reduce2 extends Reducer<Text,Text,Text,Text>
 	{
 		public void reduce(Text key, Iterable<Text> values,Context context) throws IOException,InterruptedException
 		{
@@ -116,11 +186,12 @@ public class Part3  {
 		
 		Job jobA = Job.getInstance(confA,"MutualFriends");
 		jobA.setJarByClass(Part3.class);
-		jobA.setMapperClass(Part1.Map.class);
 		
-		jobA.setReducerClass(Part1.Reduce.class);
+		jobA.setMapperClass(Map1.class);
+		jobA.setReducerClass(Reduce1.class);
 		jobA.setOutputKeyClass(Text.class);
 		jobA.setOutputValueClass(Text.class);
+		
 		FileInputFormat.addInputPath(jobA,new Path(otherargs[1]));
 		FileOutputFormat.setOutputPath(jobA, new Path(otherargs[2]));
 		boolean mapReduce=jobA.waitForCompletion(true);
@@ -135,9 +206,9 @@ public class Part3  {
 			jobB.setJarByClass(Part3.class);
 
 			jobB.setInputFormatClass(TextInputFormat.class);
-			jobB.setMapperClass(Map.class);
+			jobB.setMapperClass(Map2.class);
 			
-			jobB.setReducerClass(Reduce.class);
+			jobB.setReducerClass(Reduce2.class);
 			jobB.setOutputKeyClass(Text.class);
 			jobB.setOutputValueClass(Text.class);
 			FileInputFormat.addInputPath(jobB,new Path(otherargs[2]));
