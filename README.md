@@ -176,7 +176,7 @@ hadoop jar <Location-of-MapReduce.jar-on-local-PC> Part2 /test/userdata.txt /tes
 3. Read the output
   ``` 
   hdfs dfs -cat /test/out2/part-r-00000
-
+```
 ### Output
 24907 Amanda,1460 Rose Street,Harvey,Illinois,89
 12547	James,4868 Lincoln Street,Camden,New Jersey,88
