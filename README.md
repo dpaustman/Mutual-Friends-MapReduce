@@ -155,7 +155,7 @@ calculated average age.
 Sample output:
 User A, 1000 Anderson blvd, Dallas, TX, average age of direct friends.
 
-## Running the files
+### Running the files
 Input Files: 
 1. soc-LiveJournal1Adj.txt
 2. userdata.txt
