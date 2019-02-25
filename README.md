@@ -169,3 +169,22 @@ Class: **Part4**
 hdfs dfs -rm -r /test/out1
 hdfs dfs -rm -r /test/out2
 ```
+2. Run the jar file:
+```
+hadoop jar <Location-of-MapReduce.jar-on-local-PC> Part2 /test/userdata.txt /test/soc-LiveJournal1Adj.txt /test/out1 /test/out2
+```
+3. Read the output
+  ``` 
+  hdfs dfs -cat /test/out2/part-r-00000
+
+### Output
+24907 Amanda,1460 Rose Street,Harvey,Illinois,89
+12547	James,4868 Lincoln Street,Camden,New Jersey,88
+41403	Richard,3799 Dog Hill Lane,Hays,Kansas,88
+2450	Kathleen,2741 Timber Ridge Road,Sacramento,California,88
+2448	Dan,3057 Elmwood Avenue,Scottsdale,Arizona,88
+2618	Leonard,4449 Kildeer Drive,Hampton,Virginia,88
+2447	Mary,1833 Boring Lane,San Francisco,California,88
+2435	Richard,4287 Locust Street,Albany,Georgia,88
+2433	Jeane,4999 Bee Street,Traverse City,Michigan,88
+21076	Joseph,1826 Alpha Avenue,Cumby,Texas,88
