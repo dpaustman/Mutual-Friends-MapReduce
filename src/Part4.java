@@ -74,8 +74,10 @@ public class Part4 {
 		int month=0;
 		int day=0;
 		int year=0;
-		String user="";
-		String data="";
+		ArrayList<String> listA=new ArrayList<String> ();
+		ArrayList<String> listB=new ArrayList<String>();
+		
+	
 		
 		public void setup(Context context) throws IOException
 		{
@@ -93,7 +95,7 @@ public class Part4 {
 				if(temp.length==10)
 				{
 					
-					map.put(temp[0].trim(),temp[9]);
+					map.put(temp[0].trim(),temp[9].trim());
 				}
 			
 				input=buff.readLine();
@@ -101,15 +103,14 @@ public class Part4 {
 			
 			Calendar cal = Calendar.getInstance();
 			month = cal.get(Calendar.MONTH);
-			day=cal.get(Calendar.YEAR);
+			day=cal.get(Calendar.DAY_OF_MONTH);
 			year=cal.get(Calendar.YEAR);
 		}
 		
 		
 		public void reduce(LongWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException
 		{
-		
-			
+			String user="",data="";
 			for(Text value:values)
 			{
 				if(value.toString().charAt(0)=='U')
@@ -122,49 +123,50 @@ public class Part4 {
 				}
 			}
 			
-			int sum=0,count=0,avg;
-			if(!user.isEmpty() && user!=null && !data.isEmpty() && data!=null)
+			int sum=0,count=0,avg,result;
+			if(!user.isEmpty() && user!=null && data!=null && !data.isEmpty())
 			{
 				String[] friends=user.toString().split(",");
-					for(String friend:friends)
+				for(String friend:friends)
+				{
+					if(map.containsKey(friend))
 					{
-						if(map.containsKey(friend))
+						String dob=map.get(friend);
+						String[] y=dob.split("/");
+						if(y.length==3)
 						{
-							String dob=map.get(friend);
-							String[] y=dob.split("/");
-						
-							int result=year-Integer.parseInt(y[2]);
+							result=year-Integer.parseInt(y[2]);
 							if(Integer.parseInt(y[0])>month)
 							{
 								result--;
 							}
-							else if(Integer.parseInt(y[0])==month &&Integer.parseInt(y[1])>day)
-							{
-								
+							else if(Integer.parseInt(y[0])==month)
+							{	
+								if(Integer.parseInt(y[1])>day)
+								{
 									result--;
-								
+								}
 							}
 							sum+=result;
 							count++;
 						}
+						
 					}
-					if(count!=0) {
-					avg=sum/count;
-					
-					String dataExt=data.toString()+","+Integer.toString(avg);
+				}
+
+					if(count!=0) 
+					{
+						avg=sum/count;
+						String dataExt=data+","+Integer.toString(avg);
 						context.write(key, new Text(dataExt));
-					
-					
-					}
+					}	
 					else
 					{
-						String dataExt=data.toString()+","+Integer.toString(0);
+						String dataExt=data+","+Integer.toString(0);
 						context.write(key, new Text(dataExt));
-					}
-					
-					
+					}	
+				
 			}
-			
 			
 		}
 		
@@ -181,7 +183,7 @@ public class Part4 {
 				String[] data=line[1].split(",");
 				if(data.length==5)
 				{
-					context.write(new IntWritable(-1*Integer.parseInt(data[4])), new Text(line[0]+"\t"+line[1]));
+					context.write(new IntWritable(Integer.parseInt(data[4])), new Text(line[0]+"\t"+line[1]));
 				}
 			}
 		}
@@ -194,7 +196,7 @@ public class Part4 {
 		{
 			for (Text value:values)
 			{
-				if(temp.size()<10)
+				if(temp.size()<15)
 				{
 					temp.add(value.toString());
 				}
@@ -217,7 +219,7 @@ public class Part4 {
 		Configuration conf=new Configuration();
 		String[] otherargs=new GenericOptionsParser(conf,args).getRemainingArgs();
 
-		conf.set("userPath", otherargs[1]);
+		conf.set("userPath", otherargs[0]);
 		Job jobA = Job.getInstance(conf,"Getting average age of friends");
 		jobA.setJarByClass(Part4.class);
 		
