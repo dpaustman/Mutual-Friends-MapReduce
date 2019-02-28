@@ -180,13 +180,20 @@ hadoop jar <Location-of-MapReduce.jar-on-local-PC> Part2 /test/userdata.txt /tes
   hdfs dfs -cat /test/out2/part-r-00000
 ```
 ### Output
-24907 Amanda,1460 Rose Street,Harvey,Illinois,89
-12547	James,4868 Lincoln Street,Camden,New Jersey,88
-41403	Richard,3799 Dog Hill Lane,Hays,Kansas,88
-2450	Kathleen,2741 Timber Ridge Road,Sacramento,California,88
-2448	Dan,3057 Elmwood Avenue,Scottsdale,Arizona,88
-2618	Leonard,4449 Kildeer Drive,Hampton,Virginia,88
-2447	Mary,1833 Boring Lane,San Francisco,California,88
-2435	Richard,4287 Locust Street,Albany,Georgia,88
-2433	Jeane,4999 Bee Street,Traverse City,Michigan,88
-21076	Joseph,1826 Alpha Avenue,Cumby,Texas,88
+```
+43227	Ray,4803 Cliffside Drive,Etna,New York,0
+43327	Evelyn,4370 Freshour Circle,San Antonio,Texas,0
+38556	Richard,3091 Hickory Lane,Washington,Washington DC,0
+38314	Jacob,4200 Arthur Avenue,Sterling,Illinois,0
+21236	Debra,4944 Church Street,New York,New York,0
+41230	Dustin,3451 Brentwood Drive,Austin,Texas,0
+41605	Nancy,2754 Briarwood Drive,Camden,New Jersey,0
+37782	Ellen,2799 Wright Court,Hamilton,Alabama,0
+37764	Everett,4127 Hawks Nest Lane,Stlouis,Missouri,0
+37739	Bonnie,3241 Armbrester Drive,Santa Monica,California,0
+37656	Amanda,4975 Cedarstone Drive,Toledo,Ohio,0
+41932	Brooke,4522 Pride Avenue,Brooklyn,New York,0
+7607	Donald,3344 Neville Street,Bloomington,Indiana,0
+818	Forrest,3223 Olen Thomas Drive,Wichita Falls,Texas,0
+37489	Anthony,4838 Bloomfield Way,Rockland,Maine,0
+```
