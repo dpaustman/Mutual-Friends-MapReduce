@@ -10,8 +10,11 @@ As Sara and Bob are not friend and so, their mutual friend list is empty. (In th
 
 Here, <User> is a unique integer ID corresponding to a unique user and <Friends> is a
 comma-separated list of unique IDs corresponding to the friends of the user with the unique ID <User>. Note that the friendships are mutual (i.e., edges are undirected): if A is friend with B then B is also friend with A. The data provided is consistent with that rule as there is an explicit entry for each side of each edge. So when you make the pair, always consider (A, B)or(B,A)foruserAandBbutnotboth.
+  
 Output: The output should contain one line per user in the following format:
+
 <User_A>, <User_B><TAB><Mutual/Common Friend List>
+  
 where <User_A> & <User_B> are unique IDs corresponding to a user A and B (A and B are friend). < Mutual/Common Friend List > is a comma-separated list of unique IDs corresponding to mutual friend list of User A and B.
 
 
@@ -65,7 +68,9 @@ hadoop jar <Location of MapReduce.jar on PC> Part1 /test/soc-LiveJournal1Adj.txt
 Please answer this question by using dataset from Q1.
 Find friend pairs whose number of common friends (number of mutual friend) is within the top-10 in all the pairs. Please
 output them in decreasing order.
+
 Output Format:
+
 <User_A>, <User_B> <TAB> <Number of Mutual Friends> <TAB> <List of user ids of Mutual Friends>
 
 ### Running Task B
