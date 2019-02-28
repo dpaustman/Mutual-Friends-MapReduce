@@ -10,7 +10,7 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
-
+import org.apache.hadoop.mapreduce.Reducer.Context;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
@@ -54,12 +54,13 @@ public class Part2 {
 	}
 	
 	
-	public static class Reduce1 extends Reducer<Text,Text,Text,IntWritable>
+	public static class Reduce1 extends Reducer<Text,Text,Text,Text>
 	{
-		
+		Text result=new Text();
 		public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException
 		{
 			HashMap<String, Integer> map=new HashMap<String, Integer>();
+			StringBuilder mutualFriends=new StringBuilder();
 			int count=0;
 			for(Text value : values)
 			{
@@ -68,6 +69,7 @@ public class Part2 {
 				{
 					if(map.containsKey(friend))
 					{
+						mutualFriends.append(friend + ',');
 						count++;
 					}
 					else
@@ -76,9 +78,14 @@ public class Part2 {
 					}
 				}
 			}
-
 			
-			context.write(key, new IntWritable(count));
+			if (mutualFriends.lastIndexOf(",") > -1)
+			{
+				
+				mutualFriends.deleteCharAt(mutualFriends.lastIndexOf(","));
+			}
+			result.set(new Text(mutualFriends.toString()));
+			context.write(key, new Text(count+"\t"+mutualFriends));
 		}
 		
 	}
@@ -89,9 +96,9 @@ public class Part2 {
 		public void map(LongWritable key,Text value,Context context) throws IOException,InterruptedException
 		{
 			String line[]=value.toString().split("\t");
-			if(line.length==2)
+			if(line.length==3)
 			{
-				context.write(new IntWritable(-1*Integer.parseInt(line[1])), new Text(line[0]+"\t"+line[1]));
+				context.write(new IntWritable(-1*Integer.parseInt(line[1])), new Text(line[0]+"\t"+line[1]+"\t"+line[2]));
 				}
 			}
 		
@@ -108,7 +115,7 @@ public class Part2 {
 				if(count<10)
 				{
 					String[] line=value.toString().split("\t");
-					context.write(new Text(line[0]),new Text(line[1]));
+					context.write(new Text(line[0]),new Text(line[1]+"\t"+line[2]));
 					count++;
 				}
 				else
@@ -140,7 +147,7 @@ public class Part2 {
 		jobA.setMapOutputKeyClass(Text.class);
 		jobA.setMapOutputValueClass(Text.class);
 		jobA.setOutputKeyClass(Text.class);
-		jobA.setOutputValueClass(IntWritable.class);
+		jobA.setOutputValueClass(Text.class);
 		
 		FileInputFormat.addInputPath(jobA,new Path(otherargs[0]));
 		FileOutputFormat.setOutputPath(jobA, new Path(otherargs[1]));
